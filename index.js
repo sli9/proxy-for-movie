@@ -28,7 +28,6 @@ app.use(
     '/',
     proxy(process.env.ORIGINAL_SERVER_URL, {
         https: true,
-        headers: {Authorization: `Bearer ${process.env.API_KEY_VALUE}`},
         userResHeaderDecorator(headers, userReq, userRes, proxyReq, proxyRes) {
             const key = userReq.clientIp;
 
