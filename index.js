@@ -26,8 +26,9 @@ app.use(requestIp.mw());
 
 app.use(
     '/',
-    proxy(process.env.ORIGINAL_SERVER_URL, {
+    proxy('https://api.themoviedb.org/3/discover/movie', {
         https: true,
+        changeOrigin: true,
         userResHeaderDecorator(headers, userReq, userRes, proxyReq, proxyRes) {
             const key = userReq.clientIp;
 
@@ -41,6 +42,7 @@ app.use(
                 const currentCookies = previousCookies.concat(newCookies);
 
                 cookiePerIP.set(key, currentCookies);
+                cookiePerIP.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjQ1OGU3NzVlNDYyOWQ0NzI4ZTQ1OGIzMjI0Y2ZhYyIsInN1YiI6IjY2Mjk1OTNkMzc4MDYyMDE3ZWRhYWY2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f5CiN-1oMWrBItC32Oq7M382c_iUffyWk02LvZzx5Xo")
             }
 
             return headers;
