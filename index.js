@@ -16,5 +16,5 @@ app.use('/', proxy('https://api.themoviedb.org/3/discover/movie', {
 }))
 
 app.listen(port, () => {
-    console.log('Server started');
+    console.log(`Server started on port ${port}`);
 });
