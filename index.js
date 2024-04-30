@@ -22,6 +22,6 @@ const tmdbRequest = async (req, res) => {
 };
 
 // Proxy any request to the TMDB API endpoint
-app.get('/', tmdbRequest);
+app.use('/', tmdbRequest);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
