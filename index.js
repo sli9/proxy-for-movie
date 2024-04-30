@@ -1,5 +1,5 @@
-const express = require('express');
-const axios = require('axios'); // Or 'request'
+import express from "express";
+import axios from "axios"
 
 const app = express();
 const port = process.env.PORT || 3000; // Set your desired port
@@ -11,7 +11,7 @@ const apiKey = '26458e775e4629d4728e458b3224cfac';
 const tmdbRequest = async (req, res) => {
     const tmdbUrl = `https://api.themoviedb.org/3${req.url}`; // Build TMDB API url
     const params = { api_key: apiKey, ...req.query }; // Include API key and query params
-
+    console.log(params)
     try {
         const response = await axios.get(tmdbUrl, { params }); // Make request to TMDB
         res.json(response.data); // Forward response data to client
