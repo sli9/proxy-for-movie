@@ -1,40 +1,27 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from "cors";
-import axios from "axios";
-
-dotenv.config();
+const express = require('express');
+const axios = require('axios'); // Or 'request'
 
 const app = express();
-const port = process.env.PORT || 3001;
-app.use(cors({
-    origin: true,
-}))
+const port = process.env.PORT || 3000; // Set your desired port
 
-app.get('/', (req, res) => {
-    res.send('hi')
-})
+// Replace with your actual TMDB API key
+const apiKey = '26458e775e4629d4728e458b3224cfac';
 
+// Function to forward request with TMDB API key
+const tmdbRequest = async (req, res) => {
+    const tmdbUrl = `https://api.themoviedb.org/3${req.url}`; // Build TMDB API url
+    const params = { api_key: apiKey, ...req.query }; // Include API key and query params
 
-// app.use('/movie', proxy('https://themoviedb.org/3/discover/movie', {
-//     changeOrigin: true,
-//     headers: {
-//         accept: 'application/json',
-//         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjQ1OGU3NzVlNDYyOWQ0NzI4ZTQ1OGIzMjI0Y2ZhYyIsInN1YiI6IjY2Mjk1OTNkMzc4MDYyMDE3ZWRhYWY2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f5CiN-1oMWrBItC32Oq7M382c_iUffyWk02LvZzx5Xo'
-//     }
-// }))
+    try {
+        const response = await axios.get(tmdbUrl, { params }); // Make request to TMDB
+        res.json(response.data); // Forward response data to client
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching data from TMDB' });
+    }
+};
 
-app.get('/movie', (req, res) => {
-    axios.get('https://themoviedb.org/3/discover/movie', {headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjQ1OGU3NzVlNDYyOWQ0NzI4ZTQ1OGIzMjI0Y2ZhYyIsInN1YiI6IjY2Mjk1OTNkMzc4MDYyMDE3ZWRhYWY2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f5CiN-1oMWrBItC32Oq7M382c_iUffyWk02LvZzx5Xo'
+// Proxy any request to the TMDB API endpoint
+app.use('/', tmdbRequest);
 
-        }})
-        .then(response => response.data.json())
-        .then(response => res.send(response))
-        .catch(err => console.log(err))
-})
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
+app.listen(port, () => console.log(`Server listening on port ${port}`));
