@@ -7,7 +7,9 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
-app.use(cors())
+app.use(cors({
+    origin: true,
+}))
 
 app.get('/', (req, res) => {
     res.send('hi')
@@ -30,6 +32,7 @@ app.get('/movie', (req, res) => {
         }})
         .then(response => response.data.json())
         .then(response => res.send(response))
+        .catch(err => console.log(err))
 })
 
 app.listen(port, () => {
