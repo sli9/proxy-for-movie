@@ -14,13 +14,9 @@ const tmdbRequest = async (req, res) => {
     console.log(params)
     try {
         const response = await axios.get(tmdbUrl, {params});
-        if (response.data.request_token) {
-            const token = response.data.request_token
-            const session = await axios.get(`https://www.themoviedb.org/authenticate/${token}`)
-            res.json(session.data)
-        }
-            res.json(response.data); // Forward response data to client
-    } catch (error) {
+            res.json(response.data)
+        }// Forward response data to client
+     catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error fetching data from TMDB' });
     }
