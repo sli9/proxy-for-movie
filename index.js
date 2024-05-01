@@ -26,7 +26,19 @@ const tmdbRequest = async (req, res) => {
     }
 };
 
+const imageRequest = async (req, res) => {
+    const imgUrl = `https://image.tmdb.org/t/p${req.url}`
+    try {
+        const response = await axios.get(imgUrl)
+        res.json(response.data)
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Error fetching image from TMDB' })
+    }
+}
+
 // Proxy any request to the TMDB API endpoint
 app.use('/', tmdbRequest);
+app.use('/image', imageRequest)
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
