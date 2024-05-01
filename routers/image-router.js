@@ -4,7 +4,7 @@ import axios from "axios";
 export const imageRouter = Router({})
 
 const imageRequest = async (req, res) => {
-    const imgUrl = `https://image.tmdb.org/t/p${req.path}`
+    const imgUrl = `https://image.tmdb.org${req.path}`
     try {
         const response = await axios.get(imgUrl)
         res.json(response.data)
@@ -14,4 +14,4 @@ const imageRequest = async (req, res) => {
     }
 }
 
-imageRouter.use('/', imageRequest)
+imageRouter.use('/p', imageRequest)

@@ -11,6 +11,6 @@ cors({
 
 // Proxy any request to the TMDB API endpoint
 app.use('/discover', discoverRouter);
-app.use('/image', imageRouter)
+app.use('/t', imageRouter)
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
