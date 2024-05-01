@@ -27,7 +27,7 @@ const tmdbRequest = async (req, res) => {
 };
 
 const imageRequest = async (req, res) => {
-    const imgUrl = `https://image.tmdb.org/t/p${req.url}`
+    const imgUrl = `https://image.tmdb.org/t/p/w185/cxevDYdeFkiixRShbObdwAHBZry.jpg`
     try {
         const response = await axios.get(imgUrl)
         res.json(response.data)
