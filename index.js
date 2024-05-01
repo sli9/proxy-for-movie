@@ -1,8 +1,12 @@
 import express from "express";
 import axios from "axios"
+import cors from 'cors'
 
 const app = express();
 const port = process.env.PORT || 3000; // Set your desired port
+cors({
+    origin: true
+})
 
 // Replace with your actual TMDB API key
 const apiKey = '26458e775e4629d4728e458b3224cfac';
