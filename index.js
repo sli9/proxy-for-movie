@@ -19,7 +19,7 @@ const tmdbRequest = async (req, res) => {
     try {
         const response = await axios.get(tmdbUrl, {params});
             res.json(response.data)
-        }// Forward response data to client
+        }
      catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error fetching data from TMDB' });
@@ -37,8 +37,7 @@ const imageRequest = async (req, res) => {
     }
 }
 
-// Proxy any request to the TMDB API endpoint
-app.use('/', tmdbRequest);
+app.use('/3/discover/movie', tmdbRequest);
 app.use('/image', imageRequest)
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
