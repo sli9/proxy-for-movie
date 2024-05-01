@@ -19,5 +19,5 @@ const tmdbRequest = async (req, res) => {
     }
 };
 
-discoverRouter.use('/movie', tmdbRequest)
+discoverRouter.get('/movie', tmdbRequest)
 
