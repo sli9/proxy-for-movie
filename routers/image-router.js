@@ -7,7 +7,7 @@ const imageRequest = async (req, res) => {
     const imgUrl = `https://image.tmdb.org${req.originalUrl}`
     try {
         const response = await axios.get(imgUrl)
-        res.json(response.data)
+        res.sendFile(response.data)
     }
     catch (error) {
         res.status(500).json({ message: 'Error fetching image from TMDB' })
