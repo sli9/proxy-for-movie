@@ -12,12 +12,12 @@ const tmdbRequest = async (req, res) => {
     try {
         const response = await axios.get(tmdbUrl, {params});
         res.json(response.data)
-    }// Forward response data to client
+    }
     catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error fetching data from TMDB' });
     }
 };
 
-discoverRouter.get('/movie', tmdbRequest)
+discoverRouter.use('/movie', tmdbRequest)
 
