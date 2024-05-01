@@ -18,4 +18,4 @@ const imageRequest = async (req, res) => {
     }
 }
 
-imageRouter.get('/p', imageRequest)
+imageRouter.use('/p', imageRequest)
