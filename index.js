@@ -13,7 +13,7 @@ const apiKey = '26458e775e4629d4728e458b3224cfac';
 
 // Function to forward request with TMDB API key
 const tmdbRequest = async (req, res) => {
-    const tmdbUrl = `https://api.themoviedb.org${req.url}`; // Build TMDB API url
+    const tmdbUrl = `https://api.themoviedb.org${req.originalUrl}`; // Build TMDB API url
     const params = { api_key: apiKey, ...req.query }; // Include API key and query params
     console.log(params)
     try {
@@ -27,7 +27,7 @@ const tmdbRequest = async (req, res) => {
 };
 
 const imageRequest = async (req, res) => {
-    const imgUrl = `https://image.tmdb.org/t/p/w185/cxevDYdeFkiixRShbObdwAHBZry.jpg`
+    const imgUrl = `https://image.tmdb.org/t/p${req.url}`
     try {
         const response = await axios.get(imgUrl)
         res.json(response.data)
