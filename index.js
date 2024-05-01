@@ -13,7 +13,7 @@ const apiKey = '26458e775e4629d4728e458b3224cfac';
 
 // Function to forward request with TMDB API key
 const tmdbRequest = async (req, res) => {
-    const tmdbUrl = `https://api.themoviedb.org/3${req.url}`; // Build TMDB API url
+    const tmdbUrl = `https://api.themoviedb.org${req.url}`; // Build TMDB API url
     const params = { api_key: apiKey, ...req.query }; // Include API key and query params
     console.log(params)
     try {
