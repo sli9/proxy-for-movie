@@ -1,7 +1,10 @@
 import {Router} from "express";
 import axios from "axios";
+import dotenv from 'dotenv'
 
-const apiKey = '26458e775e4629d4728e458b3224cfac';
+dotenv.config()
+
+const apiKey = process.env.API_KEY_VALUE;
 
 export const discoverRouter = Router({})
 
