@@ -5,11 +5,12 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const apiKey = process.env.API_KEY_VALUE;
+const url = process.env.ORIGINAL_SERVER_URL
 
 export const discoverRouter = Router({})
 
 const tmdbRequest = async (req, res) => {
-    const tmdbUrl = `https://api.themoviedb.org/3${req.originalUrl}`; // Build TMDB API url
+    const tmdbUrl = `${url}${req.originalUrl}`; // Build TMDB API url
     const params = { api_key: apiKey, ...req.query }; // Include API key and query params
     console.log(params)
     try {
